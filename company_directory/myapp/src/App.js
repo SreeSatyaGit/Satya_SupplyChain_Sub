@@ -7,6 +7,7 @@ import CompanyDetails from './CompanyDetails';
 
 function App() {
   return (
+    
     <Router>
       <div className="App">
         <main>
