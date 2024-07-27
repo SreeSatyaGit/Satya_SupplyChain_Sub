@@ -56,7 +56,7 @@ http://localhost:3000
 ```
 
 ## Project Structure
-
+```bash
 .
 ├── backend
 │   ├── company_directory
