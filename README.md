@@ -2,20 +2,6 @@
 
 This project is a web application that displays a list of companies and their details, including multiple possible locations. The application uses a Python backend API (Django) and a React frontend with map integration, and it is containerized using Docker.
 
-## Table of Contents
-
-- [Project Overview](#project-overview)
-- [Features](#features)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Running the Application](#running-the-application)
-- [Endpoints](#endpoints)
-- [Usage](#usage)
-- [Screenshots](#screenshots)
-- [Technologies Used](#technologies-used)
-- [Contributing](#contributing)
-- [License](#license)
-
 ## Project Overview
 
 This project aims to provide an easy-to-use interface to view company information and their respective locations on a map. The application allows users to:
