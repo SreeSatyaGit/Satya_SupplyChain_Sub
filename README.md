@@ -31,3 +31,12 @@ Before you begin, ensure you have the following installed:
 ```bash
 git clone https://github.com/yourusername/company-directory.git
 cd company-directory
+```
+
+2. To Run Application:
+
+```bash
+docker-compose build
+docker-compose up
+```
+
