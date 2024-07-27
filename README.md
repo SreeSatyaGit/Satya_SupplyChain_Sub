@@ -34,7 +34,7 @@ cd company-directory
 python -m venv venv
 source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 
-pip install -r backend/requirements.txt
+pip install -r backend/requirements.txt #Install Django
 ```
 ### Step 3: Frontend Setup
 
