@@ -4,7 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { fetchData } from './api';
-import './App.css'; // Import the CSS file
+import './App.css'; 
 
 // Fix default icon issue with Leaflet in React
 delete L.Icon.Default.prototype._getIconUrl;
@@ -21,6 +21,7 @@ const CompanyDetails = () => {
   const [loadingCompany, setLoadingCompany] = useState(true);
   const [loadingLocations, setLoadingLocations] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedLocation, setSelectedLocation] = useState(null); // State to store the selected location
 
   // Define custom icons
   const icon1 = new L.Icon({
@@ -95,12 +96,14 @@ const CompanyDetails = () => {
     return <div>No company data available</div>;
   }
 
-  const MapWithMarkers = ({ company, locations }) => {
+  const MapWithMarkers = ({ company, locations, selectedLocation }) => {
     const map = useMap();
 
-    const handleMarkerClick = (location) => {
-      map.setView([location.latitude, location.longitude], 13);
-    };
+    useEffect(() => {
+      if (selectedLocation) {
+        map.setView([selectedLocation.latitude, selectedLocation.longitude], 13);
+      }
+    }, [selectedLocation, map]);
 
     return (
       <>
@@ -120,7 +123,7 @@ const CompanyDetails = () => {
             icon = icon3;
           }
           return (
-            <Marker key={location.location_id} position={[location.latitude, location.longitude]} icon={icon} eventHandlers={{ click: () => handleMarkerClick(location) }}>
+            <Marker key={location.location_id} position={[location.latitude, location.longitude]} icon={icon}>
               <Popup>
                 {location.name} <br /> {location.address}
               </Popup>
@@ -132,14 +135,7 @@ const CompanyDetails = () => {
   };
 
   const handleLocationClick = (location) => {
-    const mapElement = document.querySelector('.leaflet-container');
-    if (mapElement) {
-      mapElement.scrollIntoView({ behavior: 'smooth' });
-      const map = document.querySelector('.leaflet-container')._leaflet_map;
-      if (map) {
-        map.setView([location.latitude, location.longitude], 13);
-      }
-    }
+    setSelectedLocation(location);
   };
 
   return (
@@ -152,18 +148,18 @@ const CompanyDetails = () => {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
-          <MapWithMarkers company={company} locations={locations} />
+          <MapWithMarkers company={company} locations={locations} selectedLocation={selectedLocation} />
         </MapContainer>
       </div>
       <h2>Locations</h2>
       <ul className="location-list">
         {locations.map(location => (
-          <li key={location.location_id} className="location-item" onClick={() => handleLocationClick(location)}>
+          <button key={location.location_id} className="location-item" onClick={() => handleLocationClick(location)}>
             <strong>Name:</strong> {location.name} <br />
             <strong>Address:</strong> {location.address} <br />
             <strong>Latitude:</strong> {location.latitude} <br />
             <strong>Longitude:</strong> {location.longitude}
-          </li>
+          </button>
         ))}
       </ul>
       <a href="/" className="back-link">Back to List</a>
