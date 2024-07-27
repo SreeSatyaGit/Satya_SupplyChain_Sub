@@ -25,7 +25,7 @@ Before you begin, ensure you have met the following requirements:
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/company-directory.git
+git clone https://github.com/Satya_SupplyChain_Sub/company-directory.git
 cd company-directory
 ```
 ### Step 2: Backend Installation
@@ -108,4 +108,5 @@ http://localhost:3000
 │   
 ├── docker-compose.yml
 └── README.md
+```
 
