@@ -54,6 +54,11 @@ docker-compose up --build
 docker-compose up
 http://localhost:3000
 ```
+## Testing
+```
+npm test # In myapp folder to test the UI code
+
+```
 
 ## Project Structure
 ```bash
