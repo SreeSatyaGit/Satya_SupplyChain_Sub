@@ -15,7 +15,7 @@ L.Icon.Default.mergeOptions({
 });
 
 const CompanyDetails = () => {
-    const { id } = useParams();
+    const { id } = useParams(); // Retrieve the company ID from the URL parameters
     const [company, setCompany] = useState(null);
     const [locations, setLocations] = useState([]);
     const [loadingCompany, setLoadingCompany] = useState(true);
@@ -50,6 +50,7 @@ const CompanyDetails = () => {
         shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
     });
 
+    // Fetch company details when component mounts or when ID changes
     useEffect(() => {
         if (id) {
             fetchData(`${process.env.REACT_APP_BACKEND_URL}/api/companies/${id}/`)
@@ -64,6 +65,7 @@ const CompanyDetails = () => {
         }
     }, [id]);
 
+    // Fetch locations associated with the company when component mounts or when ID changes
     useEffect(() => {
         if (id) {
             fetchData(`${process.env.REACT_APP_BACKEND_URL}/api/companies/${id}/locations/`)
@@ -78,14 +80,17 @@ const CompanyDetails = () => {
         }
     }, [id]);
 
+    // Display loading state while fetching data
     if (loadingCompany || loadingLocations) {
         return <div>Loading...</div>;
     }
 
+    // Display error message if there was an issue fetching data
     if (error) {
         return <div>Error: {error}</div>;
     }
 
+    // Display message if no company data is available
     if (!company) {
         return <div>No company data available</div>;
     }
@@ -107,6 +112,7 @@ const CompanyDetails = () => {
                     </Marker>
                     {locations.map((location, index) => {
                         let icon;
+                        // Rotate through custom icons for each location
                         if (index % 3 === 0) {
                             icon = icon1;
                         } else if (index % 3 === 1) {
